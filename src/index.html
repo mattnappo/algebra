@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 
-                                <button class="btn red waves-effect waves-light right" type="submit" name="action">Submit
+                                <button onclick="execute();" class="btn red waves-effect waves-light right" type="submit" name="action">Solve
                                     <i class="mdi-content-send right"></i>
                                 </button>
                                 
@@ -58,9 +58,33 @@
         </div>
 
         <!--  Scripts -->
+        <script src="js/algebra-0.2.5.js"></script>
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="js/materialize.js"></script>
-        <script src="js/index.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            SOLVER.init([]);
+        </script>
+
+        <script type="text/javascript">        
+            var Fraction = algebra.Fraction;
+            var Expression = algebra.Expression;
+            var Equation = algebra.Equation;
+
+            var equation;
+            var solve_for;
+            var expression;
+
+            function execute() {
+                var raw_equation
+                var left_side = algebra.parse("10x");
+                var right_size = algebra.parse("10");
+
+                var eq = new Equation(x1, x2);
+                console.log(eq.toString());
+                console.log(eq.solveFor("x"));
+            }
+        </script>
 
     </body>
 </html>
