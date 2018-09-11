@@ -24,7 +24,7 @@
         </div>
 
 
-        <div class="container">
+        <div class="container" id="container">
             <div class="section">
                 <!--   Icon Section   -->
                 <div class="col s12 m12 l6">
@@ -34,7 +34,7 @@
 
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <input id="equation" type="text">
+                                        <input id="equation" type="text" required>
                                         <label for="equation">Equation</label>
                                     </div>
                                 </div>
@@ -61,10 +61,10 @@
         <script src="js/algebra-0.2.5.js"></script>
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="js/materialize.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+        <!-- <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             SOLVER.init([]);
-        </script>
+        </script> -->
 
         <script type="text/javascript">        
             var Fraction = algebra.Fraction;
@@ -76,13 +76,19 @@
             var expression;
 
             function execute() {
-                var raw_equation
-                var left_side = algebra.parse("10x");
-                var right_size = algebra.parse("10");
+                var raw_equation = document.getElementById("equation").value;
+                solve_for = document.getElementById("solve_for");
+                equation = raw_equation.split("=");
+                
+                var left_side = algebra.parse(equation[0]);
+                var right_side = algebra.parse(equation[1]);
 
-                var eq = new Equation(x1, x2);
-                console.log(eq.toString());
-                console.log(eq.solveFor("x"));
+                var eq = new Equation(left_side, right_side);
+                var container = document.getElementById("container");
+                var solved = eq.solveFor("x");
+                
+                var answer = document.createTextNode(solved);
+                container.appendChild(answer);
             }
         </script>
 
