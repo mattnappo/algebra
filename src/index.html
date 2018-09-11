@@ -24,13 +24,13 @@
         </div>
 
 
-        <div class="container" id="container">
+        <div class="container">
             <div class="section">
                 <!--   Icon Section   -->
                 <div class="col s12 m12 l6">
                     <div class="card-panel">
                         <div class="row">
-                            <form class="col s12">
+                            <form class="col s12" id="input_form">
 
                                 <div class="row">
                                     <div class="input-field col s12">
@@ -41,7 +41,7 @@
                                 
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <input id="solve_for" type="text">
+                                        <input id="solve_for" type="text" required>
                                         <label for="solve_for">Solve for</label>
                                     </div>
                                 </div>
@@ -56,6 +56,31 @@
                 </div>
             </div>
         </div>
+
+        <div class="container" id="answer_output" style="display: none;">
+                <div class="section">
+                    <!--   Icon Section   -->
+                    <div class="col s12 m12 l6">
+                        <div class="card-panel">
+                            <div class="row">
+                                <form class="col s12">
+                                    <h4 id="equation_header">
+
+                                    </h4>
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <p id="equation_answer">
+                                                
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         <!--  Scripts -->
         <script src="js/algebra-0.2.5.js"></script>
@@ -75,20 +100,29 @@
             var solve_for;
             var expression;
 
-            function execute() {
+            function solve() {
                 var raw_equation = document.getElementById("equation").value;
-                solve_for = document.getElementById("solve_for");
-                equation = raw_equation.split("=");
+                solve_for = document.getElementById("solve_for").value;
+                console.log("solve for: " + solve_for);
+                raw_equation = raw_equation.split("=");
                 
-                var left_side = algebra.parse(equation[0]);
-                var right_side = algebra.parse(equation[1]);
+                var left_side = algebra.parse(raw_equation[0]);
+                var right_side = algebra.parse(raw_equation[1]);
 
-                var eq = new Equation(left_side, right_side);
-                var container = document.getElementById("container");
-                var solved = eq.solveFor("x");
+                var equation = new Equation(left_side, right_side);
+
+                var answer = equation.solveFor(solve_for);
+                document.getElementById("answer_output").style.display = "block";
+                document.getElementById("equation_header").innerHTML = equation.toString();
+                document.getElementById("equation_answer").innerHTML = solve_for + " = " + answer;
                 
-                var answer = document.createTextNode(solved);
-                container.appendChild(answer);
+            }
+
+            function execute() {
+                var input_form = document.getElementById("input_form");
+                if (input_form.checkValidity() === true) {
+                    solve();
+                }
             }
         </script>
 
