@@ -1,2 +1,2 @@
 # Algebra Solver
-Algebra solver (algebra.js implementation)
+Simple Algebra expression  solver (algebra.js implementation)
