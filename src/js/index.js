@@ -14,31 +14,31 @@ var SOLVER = SOLVER || (function() {
     var _args = {}; // private
     var equation;
     var solve_for;
+    var answer;
     return {
         init : function(Args) {
             _args = Args;
             
             var raw_equation = document.getElementById("equation").value;
-
-            if (raw_equation.indexOf('=') > -1) {
-                
-            } else {
-                
-            }
-
             solve_for = document.getElementById("solve_for").value;
 
-            var left_side = algebra.parse(raw_equation[0]);
-            var right_side = algebra.parse(raw_equation[1]);
-        
-            equation = new Equation(left_side, right_side);
-
+            if (raw_equation.indexOf('=') > -1) {
+                raw_equation = raw_equation.split("=");
+                var left_side = algebra.parse(raw_equation[0]);
+                var right_side = algebra.parse(raw_equation[1]);
+                equation = new Equation(left_side, right_side);
+                answer = equation.solveFor(solve_for);
+            } else {
+                equation = algebra.parse(raw_equation);
+                console.log("expression: " + equation);
+                answer = equation;
+            }
             this.solve();
         },
         solve : function() {
             $("#answer_output").show();
-            var answer = equation.solveFor(solve_for);
-            document.getElementById("equation_header").innerHTML = equation.toString();
+            
+            document.getElementById("equation_header").innerHTML = equation;
             document.getElementById("equation_answer").innerHTML = solve_for + " = " + answer;
     
         }
