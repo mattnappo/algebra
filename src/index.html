@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 
-                                <button onclick="execute();" class="btn red waves-effect waves-light right" type="submit" name="action">Solve
+                                <button onclick="execute();" class="btn red waves-effect waves-light right" type="button">Solve
                                     <i class="mdi-content-send right"></i>
                                 </button>
                                 
@@ -57,7 +57,7 @@
             </div>
         </div>
 
-        <div class="container" id="answer_output" style="display: none;">
+        <div class="container" id="answer_output">
                 <div class="section">
                     <!--   Icon Section   -->
                     <div class="col s12 m12 l6">
@@ -91,7 +91,8 @@
             SOLVER.init([]);
         </script> -->
 
-        <script type="text/javascript">        
+        <script type="text/javascript">
+            $("#answer_output").hide();
             var Fraction = algebra.Fraction;
             var Expression = algebra.Expression;
             var Equation = algebra.Equation;
@@ -112,7 +113,7 @@
                 var equation = new Equation(left_side, right_side);
 
                 var answer = equation.solveFor(solve_for);
-                document.getElementById("answer_output").style.display = "block";
+                $("#answer_output").show();
                 document.getElementById("equation_header").innerHTML = equation.toString();
                 document.getElementById("equation_answer").innerHTML = solve_for + " = " + answer;
                 
