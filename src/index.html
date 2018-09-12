@@ -41,8 +41,8 @@
                                 
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <input id="solve_for" type="text" required>
-                                        <label for="solve_for">Solve for</label>
+                                        <input id="solve_for" type="text">
+                                        <label for="solve_for">Solve for (leave blank for factoring)</label>
                                     </div>
                                 </div>
                                 
@@ -86,46 +86,7 @@
         <script src="js/algebra-0.2.5.js"></script>
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="js/materialize.js"></script>
-        <!-- <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            SOLVER.init([]);
-        </script> -->
-
-        <script type="text/javascript">
-            $("#answer_output").hide();
-            var Fraction = algebra.Fraction;
-            var Expression = algebra.Expression;
-            var Equation = algebra.Equation;
-
-            var equation;
-            var solve_for;
-            var expression;
-
-            function solve() {
-                var raw_equation = document.getElementById("equation").value;
-                solve_for = document.getElementById("solve_for").value;
-                console.log("solve for: " + solve_for);
-                raw_equation = raw_equation.split("=");
-                
-                var left_side = algebra.parse(raw_equation[0]);
-                var right_side = algebra.parse(raw_equation[1]);
-
-                var equation = new Equation(left_side, right_side);
-
-                var answer = equation.solveFor(solve_for);
-                $("#answer_output").show();
-                document.getElementById("equation_header").innerHTML = equation.toString();
-                document.getElementById("equation_answer").innerHTML = solve_for + " = " + answer;
-                
-            }
-
-            function execute() {
-                var input_form = document.getElementById("input_form");
-                if (input_form.checkValidity() === true) {
-                    solve();
-                }
-            }
-        </script>
+        <script type="text/javascript" src="js/index.js"></script>
 
     </body>
 </html>
